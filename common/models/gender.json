@@ -1,0 +1,34 @@
+{
+  "name": "Gender",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "row_id": {
+      "type": "number",
+      "description": "The row_id of the given Patient object."
+    },
+    "subject_id": {
+      "type": "number",
+      "description": "The subject_id of the given Patient object."
+    },
+    "gender": {
+      "type": "string",
+      "description": "The gender of the given Patient object."
+    },
+    "dob": {
+      "type": "string",
+      "description": "The date of birth of the given Patient object."
+    },
+    "dod": {
+      "type": "string",
+      "description": "The date of death of the given Patient object."
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

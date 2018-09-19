@@ -42,5 +42,17 @@
   "Measurement": {
     "dataSource": "postgres",
     "public": true
+  },
+  "Age": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "Gender": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "Value": {
+    "dataSource": "postgres",
+    "public": true
   }
 }
