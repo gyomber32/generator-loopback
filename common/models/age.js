@@ -12,7 +12,7 @@ module.exports = function (Age) {
 
     var postgres = Age.app.dataSources.postgres.connector;
     if (dob != undefined) {
-      var sql = 'SELECT dob FROM patients WHERE dob = ' + '$1' + ' LIMIT 2;';
+      var sql = 'SELECT dob FROM patients WHERE dob = ' + '$1' + ' LIMIT 1;';
       var params = [dob];
       postgres.execute(sql, params, (err, result) => {
         if (err) {
@@ -22,7 +22,7 @@ module.exports = function (Age) {
         }
       });
     } else {
-      var sql = 'SELECT dob FROM patients LIMIT 2;';
+      var sql = 'SELECT dob FROM patients LIMIT 1;';
       postgres.execute(sql, null, (err, result) => {
         if (err) {
           callback(err);
