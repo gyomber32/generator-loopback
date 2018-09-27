@@ -20,7 +20,6 @@ module.exports = function (Value) {
 
   }
 
-
   /**
    * getValue
    * @param {string} value The value of the the database. Values are given by using the value (e.g.: 185 for height or 8.2 for the blood glucose).
@@ -40,22 +39,14 @@ module.exports = function (Value) {
         var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
         var unit = '226512';
         var params = [value, unit];
-        postgres.execute(sql, params, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, params, function(data, error){
+          callback(data,error);
         });
       }
       if (value == undefined) {
         var sql = 'SELECT value FROM result WHERE itemid = 226512 LIMIT 2;';
-        postgres.execute(sql, null, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, null, function(data, error){
+          callback(data,error);
         });
       }
     }
@@ -67,22 +58,14 @@ module.exports = function (Value) {
         var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
         var unit = '226730';
         var params = [value, unit];
-        postgres.execute(sql, params, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, params, function(data, error){
+          callback(data,error);
         });
       }
       if (value == undefined) {
         var sql = 'SELECT value FROM result WHERE itemid = 226730 LIMIT 2;';
-        postgres.execute(sql, null, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, null, function(data, error){
+          callback(data,error);
         });
       }
     }
@@ -98,23 +81,14 @@ module.exports = function (Value) {
         var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
         var unit = '220050';
         var params = [systolic, unit];
-        postgres.execute(sql, params, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, params, function(data, error){
+          callback(data,error);
         });
-
       }
       if (value == undefined) {
         var sql = 'SELECT value FROM result WHERE itemid = 220050 LIMIT 2;';
-        postgres.execute(sql, null, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, null, function(data, error){
+          callback(data,error);
         });
       }
 
@@ -124,77 +98,52 @@ module.exports = function (Value) {
         var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
         var unit = '220051';
         var params = [diastolic, unit];
-        postgres.execute(sql, params, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, params, function(data, error){
+          callback(data,error);
         });
-
       }
       if (value == undefined) {
         var sql = 'SELECT value FROM result WHERE itemid = 220051 LIMIT 2;';
-        postgres.execute(sql, null, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, null, function(data, error){
+          callback(data,error);
         });
       }
     }
 
     /* Blood Glucose query */
 
-    if (measurement == 'Bloob Glucose' || measurement == 'BG' || measurement == 'Bloob glucose' || measurement == 'bloob glucose' || measurement == 'bg' || measurement == 'Vércukor' || measurement == 'vércukor' || measurement == 'Vercukor' || measurement == 'vercukor' || measurement == 'Vércukorszint' || measurement == 'vércukorszint' || measurement == 'Vercukorszint' || measurement == 'vercukorszint') {
+    if (measurement == 'Blood Glucose' || measurement == 'BG' || measurement == 'Blood glucose' || measurement == 'blood glucose' || measurement == 'bg' || measurement == 'Vércukor' || measurement == 'vércukor' || measurement == 'Vercukor' || measurement == 'vercukor' || measurement == 'Vércukorszint' || measurement == 'vércukorszint' || measurement == 'Vercukorszint' || measurement == 'vercukorszint') {
       if (value != undefined) {
         var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
         var unit = '1529';
         var params = [value, unit];
-        postgres.execute(sql, params, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, params, function(data, error){
+          callback(data,error);
         });
       }
       if (value == undefined) {
         var sql = 'SELECT value FROM result WHERE itemid = 1529 LIMIT 2;';
-        postgres.execute(sql, null, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, null, function(data, error){
+          callback(data,error);
         });
       }
     }
 
     /* Blood Oxygen query */
 
-    if (measurement == 'Bloob Oxygen' || measurement == 'BO' || measurement == 'Blood oxygen' || measurement == 'blood oxygen' || measurement == 'bo' || measurement == 'Véroxigén' || measurement == 'véroxigén' || measurement == 'Veroxigen' || measurement == 'veroxigen' || measurement == 'Véroxigénszint' || measurement == 'véroxigénszint' || measurement == 'Veroxigenszint' || measurement == 'veroxigenszint') {
+    if (measurement == 'Blood Oxygen' || measurement == 'BO' || measurement == 'Blood oxygen' || measurement == 'blood oxygen' || measurement == 'bo' || measurement == 'Véroxigén' || measurement == 'véroxigén' || measurement == 'Veroxigen' || measurement == 'veroxigen' || measurement == 'Véroxigénszint' || measurement == 'véroxigénszint' || measurement == 'Veroxigenszint' || measurement == 'veroxigenszint') {
       if (value != undefined) {
         var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
         var unit = '220277';
         var params = [value, unit];
-        postgres.execute(sql, params, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, params, function(data, error){
+          callback(data,error);
         });
       }
       if (value == undefined) {
         var sql = 'SELECT value FROM result WHERE itemid = 220277 LIMIT 2;';
-        postgres.execute(sql, null, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, null, function(data, error){
+          callback(data,error);
         });
       }
     }
@@ -206,22 +155,14 @@ module.exports = function (Value) {
         var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
         var unit = '227687';
         var params = [value, unit];
-        postgres.execute(sql, params, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, params, function(data, error){
+          callback(data,error);
         });
       }
       if (value == undefined) {
         var sql = 'SELECT value FROM result WHERE itemid = 227687 LIMIT 2;';
-        postgres.execute(sql, null, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, null, function(data, error){
+          callback(data,error);
         });
       }
     }
@@ -229,103 +170,71 @@ module.exports = function (Value) {
     /* Lung Sounds query*/
 
     if (measurement == 'Lung Sound' || measurement == 'Lung sound' || measurement == 'lung sound' || measurement == 'loung sounds' || measurement == 'lu' || measurement == 'LU' || measurement == 'Tüdőhang' || measurement == 'tüdőhang' || measurement == 'Tudohang' || measurement == 'tudohang') {
+      /* rll query */
       if (value != undefined) {
-        /* rll query */
         var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
         var unit = '593';
         var params = [value, unit];
-        postgres.execute(sql, params, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, params, function(data, error){
+          callback(data,error);
         });
       }
       if (value == undefined) {
         var sql = 'SELECT value FROM result WHERE itemid = 593 LIMIT 2;';
-        postgres.execute(sql, null, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, null, function(data, error){
+          callback(data,error);
         });
       }
 
+      /* rul query */
       if (value != undefined) {
-        /* rul query */
         var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
         var unit = '599';
         var params = [value, unit];
-        postgres.execute(sql, params, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, params, function(data, error){
+          callback(data,error);
         });
       }
       if (value == undefined) {
         var sql = 'SELECT value FROM result WHERE itemid = 599 LIMIT 2;';
-        postgres.execute(sql, null, (result, err) => {
-          if (result) {
-            callback(result);
-          } else {
-            callback(err);
-          }
+        postgres.execute(sql, null, function(data, error){
+          callback(data,error);
         });
       }
 
       /* lll query */
-      var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
-      var unit = '425';
-      var params = [value, unit];
-      postgres.execute(sql, params, (result, err) => {
-        if (result) {
-          callback(result);
-        } else {
-          callback(err);
-        }
-      });
-    
-    if (value == undefined) {
-      var sql = 'SELECT value FROM result WHERE itemid = 425 LIMIT 2;';
-      postgres.execute(sql, null, (result, err) => {
-        if (result) {
-          callback(result);
-        } else {
-          callback(err);
-        }
-      });
-    }
+      if(value != undefined){
+        var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+        var unit = '425';
+        var params = [value, unit];
+        postgres.execute(sql, params, function(data, error){
+          callback(data,error);
+        });
+      }
+      if (value == undefined) {
+        var sql = 'SELECT value FROM result WHERE itemid = 425 LIMIT 2;';
+        postgres.execute(sql, null, function(data, error){
+          callback(data,error);
+        });
+      }
 
-    /* lul query */
-    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
-      var unit = '428';
-      var params = [value, unit];
-      postgres.execute(sql, params, (result, err) => {
-        if (result) {
-          callback(result);
-        } else {
-          callback(err);
-        }
-      });
-    
-    if (value == undefined) {
-      var sql = 'SELECT value FROM result WHERE itemid = 428 LIMIT 2;';
-      postgres.execute(sql, null, (result, err) => {
-        if (result) {
-          callback(result);
-        } else {
-          callback(err);
-        }
-      });
-    }
-
+      /* lul query */
+      if(value != undefined){
+        var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+        var unit = '428';
+        var params = [value, unit];
+        postgres.execute(sql, params, function(data, error){
+          callback(data,error);
+        });
+      }
+      if (value == undefined) {
+        var sql = 'SELECT value FROM result WHERE itemid = 428 LIMIT 2;';
+        postgres.execute(sql, null, function(data, error){
+          callback(data,error);
+        });
+      }
+    } 
   }
-   
-}
 
   Value.remoteMethod('addValue',
     {

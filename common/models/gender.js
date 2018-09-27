@@ -19,7 +19,6 @@ module.exports = function (Gender) {
 
   }
 
-
   /**
    * getGender
    * @param {string} gender The gender of the database. Values are given by using the sex (e.g.: F - female or M - male).
@@ -39,28 +38,17 @@ module.exports = function (Gender) {
       }
       var sql = 'SELECT gender FROM patients WHERE gender = ' + '$1' + ' LIMIT 5;';
       var params = [gender];
-      postgres.execute(sql, params, (err, result) => {
-        if (err) {
-          callback(err);
-        } else {
-          callback(result);
-        }
+      postgres.execute(sql, params, function(data, error){
+        callback(data,error);
       });
     } else {
       var sql = 'SELECT gender FROM patients LIMIT 5;';
-      postgres.execute(sql, null, (err, result) => {
-        if (err) {
-          callback(err);
-        } else {
-          callback(result);
-        }
+      postgres.execute(sql, null, function(data, error){
+        callback(data,error);
       });
     }
 
   }
-
-
-
 
   Gender.remoteMethod('addGender',
     {
