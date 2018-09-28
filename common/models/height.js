@@ -1,14 +1,14 @@
 
-module.exports = function(Gender) {
+module.exports = function(Height) {
 
 /**
- * addGender
- * @param {string} gender Add gender to the database.
+ * addHeight
+ * @param {string} height The height measurement value of the database.
  * @callback {Function} callback Callback function
  * @param {Error|string} err Error object
  * @param {any} result Result object
  */
-Gender.addGender = function(gender, callback) {
+Height.addHeight = function(height, callback) {
 
   // Replace the code below with your implementation.
   // Please make sure the callback is invoked.
@@ -21,13 +21,13 @@ Gender.addGender = function(gender, callback) {
 
 
 /**
- * getGender
- * @param {string} gender The gender of the database. Values are given by using the sex (e.g.: F - female or M - male).
+ * getHeight
+ * @param {string} height The height in the the database. Values are given by using the value (e.g.: 178 or 184).
  * @callback {Function} callback Callback function
  * @param {Error|string} err Error object
- * @param {Gender} result Result object
+ * @param {Height} result Result object
  */
-Gender.getGender = function(gender, callback) {
+Height.getHeight = function(height, callback) {
 
   // Replace the code below with your implementation.
   // Please make sure the callback is invoked.
@@ -41,13 +41,13 @@ Gender.getGender = function(gender, callback) {
 
 
 
-Gender.remoteMethod('addGender',
+Height.remoteMethod('addHeight',
   { isStatic: true,
   consumes: [ 'application/json' ],
   accepts:
-   [ { arg: 'gender',
+   [ { arg: 'height',
        type: 'string',
-       description: 'Add gender to the database.',
+       description: 'The height measurement value of the database.',
        required: false,
        http: { source: 'query' } } ],
   returns: [],
@@ -55,18 +55,18 @@ Gender.remoteMethod('addGender',
   description: undefined }
 );
 
-Gender.remoteMethod('getGender',
+Height.remoteMethod('getHeight',
   { isStatic: true,
   produces: [ 'application/json' ],
   accepts:
-   [ { arg: 'gender',
+   [ { arg: 'height',
        type: 'string',
        description:
-        'The gender of the database. Values are given by using the sex (e.g.: F - female or M - male).',
+        'The height in the the database. Values are given by using the value (e.g.: 178 or 184).',
        required: false,
        http: { source: 'query' } } ],
   returns:
-   [ { description: 'OK', type: [ 'Gender' ], arg: 'data', root: true } ],
+   [ { description: 'OK', type: [ 'Height' ], arg: 'data', root: true } ],
   http: { verb: 'get', path: '' },
   description: undefined }
 );

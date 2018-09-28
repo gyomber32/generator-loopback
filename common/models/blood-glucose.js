@@ -1,14 +1,14 @@
 
-module.exports = function(Gender) {
+module.exports = function(BloodGlucose) {
 
 /**
- * addGender
- * @param {string} gender Add gender to the database.
+ * addBloodGlucose
+ * @param {string} bloodGlucose The blood glucose measurement value of the database.
  * @callback {Function} callback Callback function
  * @param {Error|string} err Error object
  * @param {any} result Result object
  */
-Gender.addGender = function(gender, callback) {
+BloodGlucose.addBloodGlucose = function(bloodGlucose, callback) {
 
   // Replace the code below with your implementation.
   // Please make sure the callback is invoked.
@@ -21,13 +21,13 @@ Gender.addGender = function(gender, callback) {
 
 
 /**
- * getGender
- * @param {string} gender The gender of the database. Values are given by using the sex (e.g.: F - female or M - male).
+ * getBloodGlucose
+ * @param {string} bloodGlucose The blood glucose in the database. Values are given by using the value (e.g.: 7.1 or 9.2).
  * @callback {Function} callback Callback function
  * @param {Error|string} err Error object
- * @param {Gender} result Result object
+ * @param {BloodGlucose} result Result object
  */
-Gender.getGender = function(gender, callback) {
+BloodGlucose.getBloodGlucose = function(bloodGlucose, callback) {
 
   // Replace the code below with your implementation.
   // Please make sure the callback is invoked.
@@ -41,13 +41,13 @@ Gender.getGender = function(gender, callback) {
 
 
 
-Gender.remoteMethod('addGender',
+BloodGlucose.remoteMethod('addBloodGlucose',
   { isStatic: true,
   consumes: [ 'application/json' ],
   accepts:
-   [ { arg: 'gender',
+   [ { arg: 'bloodGlucose',
        type: 'string',
-       description: 'Add gender to the database.',
+       description: 'The blood glucose measurement value of the database.',
        required: false,
        http: { source: 'query' } } ],
   returns: [],
@@ -55,18 +55,21 @@ Gender.remoteMethod('addGender',
   description: undefined }
 );
 
-Gender.remoteMethod('getGender',
+BloodGlucose.remoteMethod('getBloodGlucose',
   { isStatic: true,
   produces: [ 'application/json' ],
   accepts:
-   [ { arg: 'gender',
+   [ { arg: 'bloodGlucose',
        type: 'string',
        description:
-        'The gender of the database. Values are given by using the sex (e.g.: F - female or M - male).',
+        'The blood glucose in the database. Values are given by using the value (e.g.: 7.1 or 9.2).',
        required: false,
        http: { source: 'query' } } ],
   returns:
-   [ { description: 'OK', type: [ 'Gender' ], arg: 'data', root: true } ],
+   [ { description: 'OK',
+       type: [ 'BloodGlucose' ],
+       arg: 'data',
+       root: true } ],
   http: { verb: 'get', path: '' },
   description: undefined }
 );

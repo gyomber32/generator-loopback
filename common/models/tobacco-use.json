@@ -1,6 +1,6 @@
 {
-  "name": "Measurement",
-  "base": "Model",
+  "name": "TobaccoUse",
+  "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true

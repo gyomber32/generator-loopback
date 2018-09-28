@@ -1,0 +1,34 @@
+{
+  "name": "LeftUpperLung",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "row_id": {
+      "type": "number",
+      "description": "The row_id of the given Measurement object."
+    },
+    "itemid": {
+      "type": "number",
+      "description": "The itemid of the given Measurement object."
+    },
+    "subject_id": {
+      "type": "number",
+      "description": "The subject_id of the given Measurement object."
+    },
+    "value": {
+      "type": "string",
+      "description": "The value of the given Measurement object."
+    },
+    "valueuom": {
+      "type": "string",
+      "description": "The unit of the given Measurement object."
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

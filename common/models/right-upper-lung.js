@@ -1,14 +1,14 @@
 
-module.exports = function(Gender) {
+module.exports = function(RightUpperLung) {
 
 /**
- * addGender
- * @param {string} gender Add gender to the database.
+ * addRul
+ * @param {string} rul The rul measurement value of the database.
  * @callback {Function} callback Callback function
  * @param {Error|string} err Error object
  * @param {any} result Result object
  */
-Gender.addGender = function(gender, callback) {
+RightUpperLung.addRul = function(rul, callback) {
 
   // Replace the code below with your implementation.
   // Please make sure the callback is invoked.
@@ -21,13 +21,13 @@ Gender.addGender = function(gender, callback) {
 
 
 /**
- * getGender
- * @param {string} gender The gender of the database. Values are given by using the sex (e.g.: F - female or M - male).
+ * getRul
+ * @param {string} rul The rul in the database. Values are given by using the value (types: Diminished, Clear, Coarse, etc).
  * @callback {Function} callback Callback function
  * @param {Error|string} err Error object
- * @param {Gender} result Result object
+ * @param {RightUpperLung} result Result object
  */
-Gender.getGender = function(gender, callback) {
+RightUpperLung.getRul = function(rul, callback) {
 
   // Replace the code below with your implementation.
   // Please make sure the callback is invoked.
@@ -41,33 +41,36 @@ Gender.getGender = function(gender, callback) {
 
 
 
-Gender.remoteMethod('addGender',
+RightUpperLung.remoteMethod('addRul',
   { isStatic: true,
   consumes: [ 'application/json' ],
   accepts:
-   [ { arg: 'gender',
+   [ { arg: 'rul',
        type: 'string',
-       description: 'Add gender to the database.',
+       description: 'The rul measurement value of the database.',
        required: false,
        http: { source: 'query' } } ],
   returns: [],
-  http: { verb: 'post', path: '' },
+  http: { verb: 'post', path: '/RUL' },
   description: undefined }
 );
 
-Gender.remoteMethod('getGender',
+RightUpperLung.remoteMethod('getRul',
   { isStatic: true,
   produces: [ 'application/json' ],
   accepts:
-   [ { arg: 'gender',
+   [ { arg: 'rul',
        type: 'string',
        description:
-        'The gender of the database. Values are given by using the sex (e.g.: F - female or M - male).',
+        'The rul in the database. Values are given by using the value (types: Diminished, Clear, Coarse, etc).',
        required: false,
        http: { source: 'query' } } ],
   returns:
-   [ { description: 'OK', type: [ 'Gender' ], arg: 'data', root: true } ],
-  http: { verb: 'get', path: '' },
+   [ { description: 'OK',
+       type: [ 'RightUpperLung' ],
+       arg: 'data',
+       root: true } ],
+  http: { verb: 'get', path: '/RUL' },
   description: undefined }
 );
 

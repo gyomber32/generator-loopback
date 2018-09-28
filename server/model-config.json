@@ -35,15 +35,19 @@
     "dataSource": "db",
     "public": false
   },
-  "Patient": {
-    "dataSource": "postgres",
-    "public": true
-  },
-  "Measurement": {
-    "dataSource": "postgres",
-    "public": true
-  },
   "Age": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "BloodGlucose": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "BloodOxygen": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "DiastolicBloodPressure": {
     "dataSource": "postgres",
     "public": true
   },
@@ -51,7 +55,35 @@
     "dataSource": "postgres",
     "public": true
   },
-  "Value": {
+  "Height": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "LeftLowerLung": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "LeftUpperLung": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "RightLowerLung": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "RightUpperLung": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "SystolicBloodPressure": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "TobaccoUse": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "Weight": {
     "dataSource": "postgres",
     "public": true
   }

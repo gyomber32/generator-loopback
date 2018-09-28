@@ -1,14 +1,14 @@
 
-module.exports = function(Gender) {
+module.exports = function(Weight) {
 
 /**
- * addGender
- * @param {string} gender Add gender to the database.
+ * addWeight
+ * @param {string} weight The weight measurement value of the database.
  * @callback {Function} callback Callback function
  * @param {Error|string} err Error object
  * @param {any} result Result object
  */
-Gender.addGender = function(gender, callback) {
+Weight.addWeight = function(weight, callback) {
 
   // Replace the code below with your implementation.
   // Please make sure the callback is invoked.
@@ -21,13 +21,13 @@ Gender.addGender = function(gender, callback) {
 
 
 /**
- * getGender
- * @param {string} gender The gender of the database. Values are given by using the sex (e.g.: F - female or M - male).
+ * getWeight
+ * @param {string} weight The weight in the database. Values are given by using the value (e.g.: 74 or 86).
  * @callback {Function} callback Callback function
  * @param {Error|string} err Error object
- * @param {Gender} result Result object
+ * @param {Weight} result Result object
  */
-Gender.getGender = function(gender, callback) {
+Weight.getWeight = function(weight, callback) {
 
   // Replace the code below with your implementation.
   // Please make sure the callback is invoked.
@@ -41,13 +41,13 @@ Gender.getGender = function(gender, callback) {
 
 
 
-Gender.remoteMethod('addGender',
+Weight.remoteMethod('addWeight',
   { isStatic: true,
   consumes: [ 'application/json' ],
   accepts:
-   [ { arg: 'gender',
+   [ { arg: 'weight',
        type: 'string',
-       description: 'Add gender to the database.',
+       description: 'The weight measurement value of the database.',
        required: false,
        http: { source: 'query' } } ],
   returns: [],
@@ -55,18 +55,18 @@ Gender.remoteMethod('addGender',
   description: undefined }
 );
 
-Gender.remoteMethod('getGender',
+Weight.remoteMethod('getWeight',
   { isStatic: true,
   produces: [ 'application/json' ],
   accepts:
-   [ { arg: 'gender',
+   [ { arg: 'weight',
        type: 'string',
        description:
-        'The gender of the database. Values are given by using the sex (e.g.: F - female or M - male).',
+        'The weight in the database. Values are given by using the value (e.g.: 74 or 86).',
        required: false,
        http: { source: 'query' } } ],
   returns:
-   [ { description: 'OK', type: [ 'Gender' ], arg: 'data', root: true } ],
+   [ { description: 'OK', type: [ 'Weight' ], arg: 'data', root: true } ],
   http: { verb: 'get', path: '' },
   description: undefined }
 );
