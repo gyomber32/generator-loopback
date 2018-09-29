@@ -30,7 +30,7 @@ Height.addHeight = function(height, callback) {
 Height.getHeight = function(height, callback) {
   var postgres = Height.app.dataSources.postgres.connector;
   if (height != undefined) {
-    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+    var sql = 'SELECT valuenum FROM result WHERE (valuenum BETWEEN $1 AND ($1 + 9)) AND itemid = $2 LIMIT 2;';
     var unit = '226730';
     var params = [height, unit];
     postgres.execute(sql, params, function(data, error){
@@ -38,7 +38,7 @@ Height.getHeight = function(height, callback) {
     });
   }
   if (height == undefined) {
-    var sql = 'SELECT value FROM result WHERE itemid = 226730 LIMIT 2;';
+    var sql = 'SELECT valuenum FROM result WHERE itemid = 226730 LIMIT 2;';
     postgres.execute(sql, null, function(data, error){
       callback(data,error);
     });
@@ -53,7 +53,7 @@ Height.remoteMethod('addHeight',
   consumes: [ 'application/json' ],
   accepts:
    [ { arg: 'height',
-       type: 'string',
+       type: 'number',
        description: 'The height measurement value of the database.',
        required: false,
        http: { source: 'query' } } ],
@@ -67,7 +67,7 @@ Height.remoteMethod('getHeight',
   produces: [ 'application/json' ],
   accepts:
    [ { arg: 'height',
-       type: 'string',
+       type: 'number',
        description:
         'The height in the the database. Values are given by using the value (e.g.: 178 or 184).',
        required: false,

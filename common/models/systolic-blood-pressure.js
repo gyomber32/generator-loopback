@@ -30,7 +30,7 @@ SystolicBloodPressure.addSystolicBloodPressure = function(systolicBloodPressure,
 SystolicBloodPressure.getSystolicBloodPressure = function(systolicBloodPressure, callback) {
   var postgres = SystolicBloodPressure.app.dataSources.postgres.connector;
   if (systolicBloodPressure != undefined) {
-    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+    var sql = 'SELECT valuenum FROM result WHERE (valuenum BETWEEN $1 AND ($1 + 9)) AND itemid = $2 LIMIT 2;';
     var unit = '220050';
     var params = [systolicBloodPressure, unit];
     postgres.execute(sql, params, function(data, error){
@@ -38,7 +38,7 @@ SystolicBloodPressure.getSystolicBloodPressure = function(systolicBloodPressure,
     });
   }
   if (systolicBloodPressure == undefined) {
-    var sql = 'SELECT value FROM result WHERE itemid = 220050 LIMIT 2;';
+    var sql = 'SELECT valuenum FROM result WHERE itemid = 220050 LIMIT 2;';
     postgres.execute(sql, null, function(data, error){
       callback(data,error);
     });
@@ -53,7 +53,7 @@ SystolicBloodPressure.remoteMethod('addSystolicBloodPressure',
   consumes: [ 'application/json' ],
   accepts:
    [ { arg: 'systolicBloodPressure',
-       type: 'string',
+       type: 'number',
        description:
         'The systolic blood pressure measurement value of the database.',
        required: false,
@@ -68,7 +68,7 @@ SystolicBloodPressure.remoteMethod('getSystolicBloodPressure',
   produces: [ 'application/json' ],
   accepts:
    [ { arg: 'systolicBloodPressure',
-       type: 'string',
+       type: 'number',
        description:
         'The systolic blood pressure in the database. Values are given by using the value (e.g.: 122 or 156).',
        required: false,

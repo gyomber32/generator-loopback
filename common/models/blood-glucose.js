@@ -30,7 +30,7 @@ BloodGlucose.addBloodGlucose = function(bloodGlucose, callback) {
 BloodGlucose.getBloodGlucose = function(bloodGlucose, callback) {
   var postgres = BloodGlucose.app.dataSources.postgres.connector;
   if (bloodGlucose != undefined) {
-    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+    var sql = 'SELECT valuenum FROM result WHERE (valuenum BETWEEN $1 AND ($1 + 19)) AND itemid = $2 LIMIT 5;';
     var unit = '1529';
     var params = [bloodGlucose, unit];
     postgres.execute(sql, params, function(data, error){
@@ -38,7 +38,7 @@ BloodGlucose.getBloodGlucose = function(bloodGlucose, callback) {
     });
   }
   if (bloodGlucose == undefined) {
-    var sql = 'SELECT value FROM result WHERE itemid = 1529 LIMIT 2;';
+    var sql = 'SELECT valuenum FROM result WHERE itemid = 1529 LIMIT 2;';
     postgres.execute(sql, null, function(data, error){
       callback(data,error);
     });
@@ -53,7 +53,7 @@ BloodGlucose.remoteMethod('addBloodGlucose',
   consumes: [ 'application/json' ],
   accepts:
    [ { arg: 'bloodGlucose',
-       type: 'string',
+       type: 'number',
        description: 'The blood glucose measurement value of the database.',
        required: false,
        http: { source: 'query' } } ],
@@ -67,7 +67,7 @@ BloodGlucose.remoteMethod('getBloodGlucose',
   produces: [ 'application/json' ],
   accepts:
    [ { arg: 'bloodGlucose',
-       type: 'string',
+       type: 'number',
        description:
         'The blood glucose in the database. Values are given by using the value (e.g.: 7.1 or 9.2).',
        required: false,

@@ -29,12 +29,6 @@ Gender.addGender = function(gender, callback) {
 Gender.getGender = function(gender, callback) {
   var postgres = Gender.app.dataSources.postgres.connector;
     if (gender != undefined) {
-      if (gender == 'Female' || gender == 'F') {
-        gender = 'F';
-      }
-      if (gender == 'Male' || gender == 'M') {
-        gender = 'M';
-      }
       var sql = 'SELECT gender FROM patients WHERE gender = ' + '$1' + ' LIMIT 5;';
       var params = [gender];
       postgres.execute(sql, params, function(data, error){
