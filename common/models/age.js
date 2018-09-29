@@ -9,18 +9,27 @@ module.exports = function(Age) {
  * @param {Age} result Result object
  */
 Age.getAge = function(age, callback) {
-
-  // Replace the code below with your implementation.
-  // Please make sure the callback is invoked.
-  process.nextTick(function() {
-    var err = new Error('Not implemented');
-    callback(err);
-  });
-  
+  var postgres = Age.app.dataSources.postgres.connector;
+    if (age != undefined) {
+      var date = new Date();
+      var year = ((date.toString()).split(" ")[3]);
+      var dob = parseInt(year) + parseInt(age) + 1;
+      console.log("dob: " + dob);
+      dobMin = '\'' + dob + '-01-01 00:00:00\'';
+      dobMax = '\'' + dob + '-12-31 00:00:00\'';
+      var sql = 'SELECT EXTRACT (year FROM age(dob)) AS age FROM patients WHERE dob BETWEEN $1 AND $2 LIMIT 1;';
+      var params = [dobMin, dobMax];
+      postgres.execute(sql, params, function(data, error){
+        callback(data,error);
+      });
+    }
+    if(age == undefined){
+      var sql = 'SELECT EXTRACT (year FROM age(dob)) AS age FROM patients LIMIT 50;';
+      postgres.execute(sql, null, function(data, error){
+        callback(data,error);
+      });
+    }
 }
-
-
-
 
 Age.remoteMethod('getAge',
   { isStatic: true,

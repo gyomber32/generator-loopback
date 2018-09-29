@@ -28,14 +28,21 @@ DiastolicBloodPressure.addDiastolicBloodPressure = function(diastolicBloodPressu
  * @param {DiastolicBloodPressure} result Result object
  */
 DiastolicBloodPressure.getDiastolicBloodPressure = function(diastolicBloodPressure, callback) {
-
-  // Replace the code below with your implementation.
-  // Please make sure the callback is invoked.
-  process.nextTick(function() {
-    var err = new Error('Not implemented');
-    callback(err);
-  });
-  
+  var postgres = DiastolicBloodPressure.app.dataSources.postgres.connector;
+  if (diastolicBloodPressure != undefined) {
+    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+    var unit = '220051';
+    var params = [diastolicBloodPressure, unit];
+    postgres.execute(sql, params, function(data, error){
+      callback(data,error);
+    });
+  }
+  if (diastolicBloodPressure == undefined) {
+    var sql = 'SELECT value FROM result WHERE itemid = 220051 LIMIT 2;';
+    postgres.execute(sql, null, function(data, error){
+      callback(data,error);
+    });
+  }
 }
 
 

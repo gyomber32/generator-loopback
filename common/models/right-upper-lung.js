@@ -28,13 +28,21 @@ RightUpperLung.addRul = function(rul, callback) {
  * @param {RightUpperLung} result Result object
  */
 RightUpperLung.getRul = function(rul, callback) {
-
-  // Replace the code below with your implementation.
-  // Please make sure the callback is invoked.
-  process.nextTick(function() {
-    var err = new Error('Not implemented');
-    callback(err);
-  });
+  var postgres = RightUpperLung.app.dataSources.postgres.connector;
+  if (rul != undefined) {
+    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+    var unit = '599';
+    var params = [rul, unit];
+    postgres.execute(sql, params, function(data, error){
+      callback(data,error);
+    });
+  }
+  if (rul == undefined) {
+    var sql = 'SELECT value FROM result WHERE itemid = 599 LIMIT 2;';
+    postgres.execute(sql, null, function(data, error){
+      callback(data,error);
+    });
+  }
   
 }
 

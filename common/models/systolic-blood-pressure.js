@@ -9,14 +9,14 @@ module.exports = function(SystolicBloodPressure) {
  * @param {any} result Result object
  */
 SystolicBloodPressure.addSystolicBloodPressure = function(systolicBloodPressure, callback) {
-
-  // Replace the code below with your implementation.
+  
+ // Replace the code below with your implementation.
   // Please make sure the callback is invoked.
   process.nextTick(function() {
     var err = new Error('Not implemented');
     callback(err);
   });
-  
+
 }
 
 
@@ -28,14 +28,21 @@ SystolicBloodPressure.addSystolicBloodPressure = function(systolicBloodPressure,
  * @param {SystolicBloodPressure} result Result object
  */
 SystolicBloodPressure.getSystolicBloodPressure = function(systolicBloodPressure, callback) {
-
-  // Replace the code below with your implementation.
-  // Please make sure the callback is invoked.
-  process.nextTick(function() {
-    var err = new Error('Not implemented');
-    callback(err);
-  });
-  
+  var postgres = SystolicBloodPressure.app.dataSources.postgres.connector;
+  if (systolicBloodPressure != undefined) {
+    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+    var unit = '220050';
+    var params = [systolicBloodPressure, unit];
+    postgres.execute(sql, params, function(data, error){
+      callback(data,error);
+    });
+  }
+  if (systolicBloodPressure == undefined) {
+    var sql = 'SELECT value FROM result WHERE itemid = 220050 LIMIT 2;';
+    postgres.execute(sql, null, function(data, error){
+      callback(data,error);
+    });
+  }
 }
 
 

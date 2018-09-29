@@ -19,7 +19,6 @@ Gender.addGender = function(gender, callback) {
   
 }
 
-
 /**
  * getGender
  * @param {string} gender The gender of the database. Values are given by using the sex (e.g.: F - female or M - male).
@@ -28,18 +27,26 @@ Gender.addGender = function(gender, callback) {
  * @param {Gender} result Result object
  */
 Gender.getGender = function(gender, callback) {
-
-  // Replace the code below with your implementation.
-  // Please make sure the callback is invoked.
-  process.nextTick(function() {
-    var err = new Error('Not implemented');
-    callback(err);
-  });
-  
+  var postgres = Gender.app.dataSources.postgres.connector;
+    if (gender != undefined) {
+      if (gender == 'Female' || gender == 'F') {
+        gender = 'F';
+      }
+      if (gender == 'Male' || gender == 'M') {
+        gender = 'M';
+      }
+      var sql = 'SELECT gender FROM patients WHERE gender = ' + '$1' + ' LIMIT 5;';
+      var params = [gender];
+      postgres.execute(sql, params, function(data, error){
+        callback(data,error);
+      });
+    } else {
+      var sql = 'SELECT gender FROM patients LIMIT 5;';
+      postgres.execute(sql, null, function(data, error){
+        callback(data,error);
+      });
+    }
 }
-
-
-
 
 Gender.remoteMethod('addGender',
   { isStatic: true,

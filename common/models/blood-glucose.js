@@ -28,14 +28,21 @@ BloodGlucose.addBloodGlucose = function(bloodGlucose, callback) {
  * @param {BloodGlucose} result Result object
  */
 BloodGlucose.getBloodGlucose = function(bloodGlucose, callback) {
-
-  // Replace the code below with your implementation.
-  // Please make sure the callback is invoked.
-  process.nextTick(function() {
-    var err = new Error('Not implemented');
-    callback(err);
-  });
-  
+  var postgres = BloodGlucose.app.dataSources.postgres.connector;
+  if (bloodGlucose != undefined) {
+    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+    var unit = '1529';
+    var params = [bloodGlucose, unit];
+    postgres.execute(sql, params, function(data, error){
+      callback(data,error);
+    });
+  }
+  if (bloodGlucose == undefined) {
+    var sql = 'SELECT value FROM result WHERE itemid = 1529 LIMIT 2;';
+    postgres.execute(sql, null, function(data, error){
+      callback(data,error);
+    });
+  }
 }
 
 

@@ -28,14 +28,21 @@ Height.addHeight = function(height, callback) {
  * @param {Height} result Result object
  */
 Height.getHeight = function(height, callback) {
-
-  // Replace the code below with your implementation.
-  // Please make sure the callback is invoked.
-  process.nextTick(function() {
-    var err = new Error('Not implemented');
-    callback(err);
-  });
-  
+  var postgres = Height.app.dataSources.postgres.connector;
+  if (height != undefined) {
+    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+    var unit = '226730';
+    var params = [height, unit];
+    postgres.execute(sql, params, function(data, error){
+      callback(data,error);
+    });
+  }
+  if (height == undefined) {
+    var sql = 'SELECT value FROM result WHERE itemid = 226730 LIMIT 2;';
+    postgres.execute(sql, null, function(data, error){
+      callback(data,error);
+    });
+  }  
 }
 
 

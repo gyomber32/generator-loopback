@@ -28,14 +28,21 @@ RightLowerLung.addRll = function(rll, callback) {
  * @param {RightLowerLung} result Result object
  */
 RightLowerLung.getRll = function(rll, callback) {
-
-  // Replace the code below with your implementation.
-  // Please make sure the callback is invoked.
-  process.nextTick(function() {
-    var err = new Error('Not implemented');
-    callback(err);
-  });
-  
+  var postgres = RightLowerLung.app.dataSources.postgres.connector;
+  if (rll != undefined) {
+    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+    var unit = '593';
+    var params = [rll, unit];
+    postgres.execute(sql, params, function(data, error){
+      callback(data,error);
+    });
+  }
+  if (rll == undefined) {
+    var sql = 'SELECT value FROM result WHERE itemid = 593 LIMIT 2;';
+    postgres.execute(sql, null, function(data, error){
+      callback(data,error);
+    });
+  }
 }
 
 

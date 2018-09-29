@@ -55,10 +55,6 @@
     "dataSource": "postgres",
     "public": true
   },
-  "Height": {
-    "dataSource": "postgres",
-    "public": true
-  },
   "LeftLowerLung": {
     "dataSource": "postgres",
     "public": true
@@ -84,6 +80,10 @@
     "public": true
   },
   "Weight": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "Height": {
     "dataSource": "postgres",
     "public": true
   }

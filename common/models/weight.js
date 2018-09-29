@@ -28,14 +28,21 @@ Weight.addWeight = function(weight, callback) {
  * @param {Weight} result Result object
  */
 Weight.getWeight = function(weight, callback) {
-
-  // Replace the code below with your implementation.
-  // Please make sure the callback is invoked.
-  process.nextTick(function() {
-    var err = new Error('Not implemented');
-    callback(err);
-  });
-  
+  var postgres = Weight.app.dataSources.postgres.connector;
+  if (weight != undefined) {
+    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+    var unit = '226512';
+    var params = [weight, unit];
+    postgres.execute(sql, params, function(data, error){
+      callback(data,error);
+    });
+  }
+  if (weight == undefined) {
+    var sql = 'SELECT value FROM result WHERE itemid = 226512 LIMIT 2;';
+    postgres.execute(sql, null, function(data, error){
+      callback(data,error);
+    });
+  }
 }
 
 

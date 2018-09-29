@@ -28,14 +28,21 @@ LeftLowerLung.addLll = function(lll, callback) {
  * @param {LeftLowerLung} result Result object
  */
 LeftLowerLung.getLll = function(lll, callback) {
-
-  // Replace the code below with your implementation.
-  // Please make sure the callback is invoked.
-  process.nextTick(function() {
-    var err = new Error('Not implemented');
-    callback(err);
-  });
-  
+  var postgres = LeftLowerLung.app.dataSources.postgres.connector;
+  if (lll != undefined) {
+    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+    var unit = '425';
+    var params = [lll, unit];
+    postgres.execute(sql, params, function(data, error){
+      callback(data,error);
+    });
+  }
+  if (lll == undefined) {
+    var sql = 'SELECT value FROM result WHERE itemid = 425 LIMIT 2;';
+    postgres.execute(sql, null, function(data, error){
+      callback(data,error);
+    });
+  }
 }
 
 
