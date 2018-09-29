@@ -1,5 +1,5 @@
 {
-  "name": "Measurement",
+  "name": "Height",
   "base": "Model",
   "idInjection": true,
   "options": {
@@ -18,8 +18,8 @@
       "type": "number",
       "description": "The subject_id of the given Measurement object."
     },
-    "value": {
-      "type": "string",
+    "valuenum": {
+      "type": "number",
       "description": "The value of the given Measurement object."
     },
     "valueuom": {
