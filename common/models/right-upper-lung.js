@@ -30,7 +30,7 @@ RightUpperLung.addRul = function(rul, callback) {
 RightUpperLung.getRul = function(rul, callback) {
   var postgres = RightUpperLung.app.dataSources.postgres.connector;
   if (rul != undefined) {
-    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 1;';
     var unit = '599';
     var params = [rul, unit];
     postgres.execute(sql, params, function(data, error){
@@ -38,7 +38,7 @@ RightUpperLung.getRul = function(rul, callback) {
     });
   }
   if (rul == undefined) {
-    var sql = 'SELECT value FROM result WHERE itemid = 599 LIMIT 2;';
+    var sql = 'SELECT value FROM result WHERE itemid = 599 LIMIT 1;';
     postgres.execute(sql, null, function(data, error){
       callback(data,error);
     });

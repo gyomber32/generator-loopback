@@ -17,14 +17,14 @@ Age.getAge = function(age, callback) {
       console.log("dob: " + dob);
       dobMin = '\'' + dob + '-01-01 00:00:00\'';
       dobMax = '\'' + dob + '-12-31 00:00:00\'';
-      var sql = 'SELECT EXTRACT (year FROM age(dob)) AS age FROM patients WHERE dob BETWEEN $1 AND $2 LIMIT 1;';
+      var sql = 'SELECT EXTRACT (year FROM age(dob)) * (-1) AS age FROM patients WHERE dob BETWEEN $1 AND $2 LIMIT 1;';
       var params = [dobMin, dobMax];
       postgres.execute(sql, params, function(data, error){
         callback(data,error);
       });
     }
     if(age == undefined){
-      var sql = 'SELECT EXTRACT (year FROM age(dob)) AS age FROM patients LIMIT 50;';
+      var sql = 'SELECT EXTRACT (year FROM age(dob)) * (-1) AS age FROM patients LIMIT 1;';
       postgres.execute(sql, null, function(data, error){
         callback(data,error);
       });

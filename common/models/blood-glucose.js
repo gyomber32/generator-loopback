@@ -30,7 +30,7 @@ BloodGlucose.addBloodGlucose = function(bloodGlucose, callback) {
 BloodGlucose.getBloodGlucose = function(bloodGlucose, callback) {
   var postgres = BloodGlucose.app.dataSources.postgres.connector;
   if (bloodGlucose != undefined) {
-    var sql = 'SELECT valuenum FROM result WHERE (valuenum BETWEEN $1 AND ($1 + 19)) AND itemid = $2 LIMIT 5;';
+    var sql = 'SELECT valuenum FROM result WHERE (valuenum BETWEEN $1 AND ($1 + 19)) AND itemid = $2 LIMIT 1;';
     var unit = '1529';
     var params = [bloodGlucose, unit];
     postgres.execute(sql, params, function(data, error){
@@ -38,7 +38,7 @@ BloodGlucose.getBloodGlucose = function(bloodGlucose, callback) {
     });
   }
   if (bloodGlucose == undefined) {
-    var sql = 'SELECT valuenum FROM result WHERE itemid = 1529 LIMIT 2;';
+    var sql = 'SELECT valuenum FROM result WHERE itemid = 1529 LIMIT 1;';
     postgres.execute(sql, null, function(data, error){
       callback(data,error);
     });

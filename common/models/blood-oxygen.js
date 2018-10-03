@@ -30,7 +30,7 @@ BloodOxygen.addBloodOxygen = function(bloodOxygen, callback) {
 BloodOxygen.getBloodOxygen = function(bloodOxygen, callback) {
   var postgres = BloodOxygen.app.dataSources.postgres.connector;
   if (bloodOxygen != undefined) {
-    var sql = 'SELECT valuenum FROM result WHERE valuenum = $1 AND itemid = $2 LIMIT 2;';
+    var sql = 'SELECT valuenum FROM result WHERE valuenum = $1 AND itemid = $2 LIMIT 1;';
     var unit = '220277';
     var params = [bloodOxygen, unit];
     postgres.execute(sql, params, function(data, error){
@@ -38,7 +38,7 @@ BloodOxygen.getBloodOxygen = function(bloodOxygen, callback) {
     });
   }
   if (bloodOxygen == undefined) {
-    var sql = 'SELECT valuenum FROM result WHERE itemid = 220277 LIMIT 2;';
+    var sql = 'SELECT valuenum FROM result WHERE itemid = 220277 LIMIT 1;';
     postgres.execute(sql, null, function(data, error){
       callback(data,error);
     });

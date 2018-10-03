@@ -30,7 +30,7 @@ Weight.addWeight = function(weight, callback) {
 Weight.getWeight = function(weight, callback) {
   var postgres = Weight.app.dataSources.postgres.connector;
   if (weight != undefined) {
-    var sql = 'SELECT valuenum FROM result WHERE (valuenum BETWEEN $1 AND ($1 + 9)) AND itemid = $2 LIMIT 2;';
+    var sql = 'SELECT valuenum FROM result WHERE (valuenum BETWEEN $1 AND ($1 + 9)) AND itemid = $2 LIMIT 1;';
     var unit = '226512';
     var params = [weight, unit];
     postgres.execute(sql, params, function(data, error){
@@ -38,7 +38,7 @@ Weight.getWeight = function(weight, callback) {
     });
   }
   if (weight == undefined) {
-    var sql = 'SELECT valuenum FROM result WHERE itemid = 226512 LIMIT 2;';
+    var sql = 'SELECT valuenum FROM result WHERE itemid = 226512 LIMIT 1;';
     postgres.execute(sql, null, function(data, error){
       callback(data,error);
     });

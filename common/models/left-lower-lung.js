@@ -30,7 +30,7 @@ LeftLowerLung.addLll = function(lll, callback) {
 LeftLowerLung.getLll = function(lll, callback) {
   var postgres = LeftLowerLung.app.dataSources.postgres.connector;
   if (lll != undefined) {
-    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 2;';
+    var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 1;';
     var unit = '425';
     var params = [lll, unit];
     postgres.execute(sql, params, function(data, error){
@@ -38,7 +38,7 @@ LeftLowerLung.getLll = function(lll, callback) {
     });
   }
   if (lll == undefined) {
-    var sql = 'SELECT value FROM result WHERE itemid = 425 LIMIT 2;';
+    var sql = 'SELECT value FROM result WHERE itemid = 425 LIMIT 1;';
     postgres.execute(sql, null, function(data, error){
       callback(data,error);
     });
