@@ -14,7 +14,7 @@ module.exports = function (Age) {
       var date = new Date();
       var year = ((date.toString()).split(" ")[3]);
       var dob = parseInt(year) + parseInt(age) + 1;
-      dobMin = '\'' + dob + '-01-01 00:00:00\'';
+      dobMin = '\'' + (dob-1) + '-01-01 00:00:00\'';
       dobMax = '\'' + dob + '-12-31 00:00:00\'';
       //console.log(dob);
       var sql = 'SELECT EXTRACT (year FROM age(dob)) * (-1) AS age FROM patients WHERE dob BETWEEN $1 AND $2 LIMIT $3;';

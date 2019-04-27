@@ -65,13 +65,15 @@ export class GenderApi extends BaseLoopBackApi {
    *
    * @param {string} gender The gender of the database. Values are given by using the sex (e.g.: F - female or M - male).
    *
+   * @param {number} quantity Quantity the user wants to generate.
+   *
    * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
    * OK
    */
-  public getGender(gender: any = {}, customHeaders?: Function): Observable<any> {
+  public getGender(gender: any = {}, quantity: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Genders/getGender";
@@ -79,6 +81,7 @@ export class GenderApi extends BaseLoopBackApi {
     let _postBody: any = {};
     let _urlParams: any = {};
     if (typeof gender !== 'undefined' && gender !== null) _urlParams.gender = gender;
+    if (typeof quantity !== 'undefined' && quantity !== null) _urlParams.quantity = quantity;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }

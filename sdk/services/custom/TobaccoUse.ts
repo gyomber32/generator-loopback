@@ -36,13 +36,15 @@ export class TobaccoUseApi extends BaseLoopBackApi {
    *
    * @param {string} tobaccoUse The tobacco use in the database. Values are given by using the value (3 types: 1. never used, 2. current user, 3. former user).
    *
+   * @param {number} quantity Quantity the user wants to generate.
+   *
    * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
    * OK
    */
-  public getTobaccoUse(tobaccoUse: any = {}, customHeaders?: Function): Observable<any> {
+  public getTobaccoUse(tobaccoUse: any = {}, quantity: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/TobaccoUses/getTobaccoUse";
@@ -50,6 +52,7 @@ export class TobaccoUseApi extends BaseLoopBackApi {
     let _postBody: any = {};
     let _urlParams: any = {};
     if (typeof tobaccoUse !== 'undefined' && tobaccoUse !== null) _urlParams.tobaccoUse = tobaccoUse;
+    if (typeof quantity !== 'undefined' && quantity !== null) _urlParams.quantity = quantity;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }

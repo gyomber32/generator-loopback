@@ -30,7 +30,8 @@ module.exports = function (BloodGlucose) {
   BloodGlucose.getBloodGlucose = function (bloodGlucose, quantity, callback) {
     var postgres = BloodGlucose.app.dataSources.postgres.connector;
     if (bloodGlucose != undefined) {
-      var sql = 'SELECT valuenum FROM result WHERE (valuenum BETWEEN $1 AND ($1 + 18)) AND itemid = $2 LIMIT $3;';
+	bloodGlucose = bloodGlucose * 18;
+      var sql = 'SELECT valuenum FROM result WHERE (valuenum BETWEEN ($1 - 18) AND ($1 + 18)) AND itemid = $2 LIMIT $3;';
       var unit = '1529';
       var params = [bloodGlucose, unit, quantity];
       postgres.execute(sql, params, function (data, error) {

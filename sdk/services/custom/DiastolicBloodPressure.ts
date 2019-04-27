@@ -65,13 +65,15 @@ export class DiastolicBloodPressureApi extends BaseLoopBackApi {
    *
    * @param {number} diastolicBloodPressure The diastolic blood pressure in the database. Values are given by using the value (e.g.: 76 or 104).
    *
+   * @param {number} quantity Quantity the user wants to generate.
+   *
    * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
    * OK
    */
-  public getDiastolicBloodPressure(diastolicBloodPressure: any = {}, customHeaders?: Function): Observable<any> {
+  public getDiastolicBloodPressure(diastolicBloodPressure: any = {}, quantity: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/DiastolicBloodPressures/diastolic";
@@ -79,6 +81,7 @@ export class DiastolicBloodPressureApi extends BaseLoopBackApi {
     let _postBody: any = {};
     let _urlParams: any = {};
     if (typeof diastolicBloodPressure !== 'undefined' && diastolicBloodPressure !== null) _urlParams.diastolicBloodPressure = diastolicBloodPressure;
+    if (typeof quantity !== 'undefined' && quantity !== null) _urlParams.quantity = quantity;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }

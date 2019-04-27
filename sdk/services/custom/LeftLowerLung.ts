@@ -65,13 +65,15 @@ export class LeftLowerLungApi extends BaseLoopBackApi {
    *
    * @param {string} lll The lll in the database. Values are given by using the value types: Diminished, Clear, Coarse, etc.
    *
+   * @param {number} quantity Quantity the user wants to generate.
+   *
    * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
    * OK
    */
-  public getLll(lll: any = {}, customHeaders?: Function): Observable<any> {
+  public getLll(lll: any = {}, quantity: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/LeftLowerLungs/LLL";
@@ -79,6 +81,7 @@ export class LeftLowerLungApi extends BaseLoopBackApi {
     let _postBody: any = {};
     let _urlParams: any = {};
     if (typeof lll !== 'undefined' && lll !== null) _urlParams.lll = lll;
+    if (typeof quantity !== 'undefined' && quantity !== null) _urlParams.quantity = quantity;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }

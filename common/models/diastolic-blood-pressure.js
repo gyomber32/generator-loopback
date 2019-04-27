@@ -30,7 +30,7 @@ module.exports = function (DiastolicBloodPressure) {
   DiastolicBloodPressure.getDiastolicBloodPressure = function (diastolicBloodPressure, quantity, callback) {
     var postgres = DiastolicBloodPressure.app.dataSources.postgres.connector;
     if (diastolicBloodPressure != undefined) {
-      var sql = 'SELECT valuenum FROM result WHERE (valuenum BETWEEN $1 AND ($1 + 9)) AND itemid = $2 LIMIT $3;';
+      var sql = 'SELECT valuenum FROM result WHERE (valuenum BETWEEN ($1 - 9) AND ($1 + 9)) AND itemid = $2 LIMIT $3;';
       var unit = '220051';
       var params = [diastolicBloodPressure, unit, quantity];
       postgres.execute(sql, params, function (data, error) {
