@@ -19,6 +19,7 @@ module.exports = function (DiastolicBloodPressure) {
 
   }
 
+
   /**
    * getDiastolicBloodPressure
    * @param {string} diastolicBloodPressure The diastolic blood pressure in the database. Values are given by using the value (e.g.: 76 or 104).
@@ -26,19 +27,20 @@ module.exports = function (DiastolicBloodPressure) {
    * @param {Error|string} err Error object
    * @param {DiastolicBloodPressure} result Result object
    */
-  DiastolicBloodPressure.getDiastolicBloodPressure = function (diastolicBloodPressure, callback) {
+  DiastolicBloodPressure.getDiastolicBloodPressure = function (diastolicBloodPressure, quantity, callback) {
     var postgres = DiastolicBloodPressure.app.dataSources.postgres.connector;
     if (diastolicBloodPressure != undefined) {
-      var sql = 'SELECT valuenum FROM result WHERE (valuenum BETWEEN $1 AND ($1 + 9)) AND itemid = $2 LIMIT 1;';
+      var sql = 'SELECT valuenum FROM result WHERE (valuenum BETWEEN ($1 - 9) AND ($1 + 9)) AND itemid = $2 LIMIT $3;';
       var unit = '220051';
-      var params = [diastolicBloodPressure, unit];
+      var params = [diastolicBloodPressure, unit, quantity];
       postgres.execute(sql, params, function (data, error) {
         callback(data, error);
       });
     }
     if (diastolicBloodPressure == undefined) {
-      var sql = 'SELECT valuenum FROM result WHERE itemid = 220051 LIMIT 1;';
-      postgres.execute(sql, null, function (data, error) {
+      var params = [quantity];
+      var sql = 'SELECT valuenum FROM result WHERE itemid = 220051 LIMIT $1;';
+      postgres.execute(sql, params, function (data, error) {
         callback(data, error);
       });
     }
@@ -74,6 +76,13 @@ module.exports = function (DiastolicBloodPressure) {
           description:
             'The diastolic blood pressure in the database. Values are given by using the value (e.g.: 76 or 104).',
           required: false,
+          http: { source: 'query' }
+        }, {
+          arg: 'quantity',
+          type: 'number',
+          description:
+            'Quantity the user wants to generate.',
+          required: true,
           http: { source: 'query' }
         }],
       returns:

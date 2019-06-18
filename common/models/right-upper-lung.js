@@ -26,19 +26,20 @@ module.exports = function (RightUpperLung) {
    * @param {Error|string} err Error object
    * @param {RightUpperLung} result Result object
    */
-  RightUpperLung.getRul = function (rul, callback) {
+  RightUpperLung.getRul = function (rul, quantity, callback) {
     var postgres = RightUpperLung.app.dataSources.postgres.connector;
     if (rul != undefined) {
-      var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT 1;';
+      var sql = 'SELECT value FROM result WHERE value = $1 AND itemid = $2 LIMIT $3;';
       var unit = '599';
-      var params = [rul, unit];
+      var params = [rul, unit, quantity];
       postgres.execute(sql, params, function (data, error) {
         callback(data, error);
       });
     }
     if (rul == undefined) {
-      var sql = 'SELECT value FROM result WHERE itemid = 599 LIMIT 1;';
-      postgres.execute(sql, null, function (data, error) {
+      var params = [quantity];
+      var sql = 'SELECT value FROM result WHERE itemid = 599 LIMIT $1;';
+      postgres.execute(sql, params, function (data, error) {
         callback(data, error);
       });
     }
@@ -74,6 +75,14 @@ module.exports = function (RightUpperLung) {
           description:
             'The rul in the database. Values are given by using the value (types: Diminished, Clear, Coarse, etc).',
           required: false,
+          http: { source: 'query' }
+        },
+        {
+          arg: 'quantity',
+          type: 'number',
+          description:
+            'Quantity the user wants to generate.',
+          required: true,
           http: { source: 'query' }
         }],
       returns:

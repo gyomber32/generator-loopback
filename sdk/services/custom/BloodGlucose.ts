@@ -65,13 +65,15 @@ export class BloodGlucoseApi extends BaseLoopBackApi {
    *
    * @param {number} bloodGlucose The blood glucose in the database. Values are given by using the value (e.g.: 7.1 or 9.2).
    *
+   * @param {number} quantity Quantity the user wants to generate.
+   *
    * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
    * OK
    */
-  public getBloodGlucose(bloodGlucose: any = {}, customHeaders?: Function): Observable<any> {
+  public getBloodGlucose(bloodGlucose: any = {}, quantity: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/BloodGlucoses/getBloodGlucose";
@@ -79,6 +81,7 @@ export class BloodGlucoseApi extends BaseLoopBackApi {
     let _postBody: any = {};
     let _urlParams: any = {};
     if (typeof bloodGlucose !== 'undefined' && bloodGlucose !== null) _urlParams.bloodGlucose = bloodGlucose;
+    if (typeof quantity !== 'undefined' && quantity !== null) _urlParams.quantity = quantity;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }

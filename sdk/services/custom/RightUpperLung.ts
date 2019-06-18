@@ -65,13 +65,15 @@ export class RightUpperLungApi extends BaseLoopBackApi {
    *
    * @param {string} rul The rul in the database. Values are given by using the value (types: Diminished, Clear, Coarse, etc).
    *
+   * @param {number} quantity Quantity the user wants to generate.
+   *
    * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
    * OK
    */
-  public getRul(rul: any = {}, customHeaders?: Function): Observable<any> {
+  public getRul(rul: any = {}, quantity: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/RightUpperLungs/RUL";
@@ -79,6 +81,7 @@ export class RightUpperLungApi extends BaseLoopBackApi {
     let _postBody: any = {};
     let _urlParams: any = {};
     if (typeof rul !== 'undefined' && rul !== null) _urlParams.rul = rul;
+    if (typeof quantity !== 'undefined' && quantity !== null) _urlParams.quantity = quantity;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }

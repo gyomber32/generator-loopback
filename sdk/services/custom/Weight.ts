@@ -65,13 +65,15 @@ export class WeightApi extends BaseLoopBackApi {
    *
    * @param {number} weight The weight in the database. Values are given by using the value (e.g.: 74 or 86).
    *
+   * @param {number} quantity Quantity the user wants to generate.
+   *
    * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
    * OK
    */
-  public getWeight(weight: any = {}, customHeaders?: Function): Observable<any> {
+  public getWeight(weight: any = {}, quantity: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Weights/getWeight";
@@ -79,6 +81,7 @@ export class WeightApi extends BaseLoopBackApi {
     let _postBody: any = {};
     let _urlParams: any = {};
     if (typeof weight !== 'undefined' && weight !== null) _urlParams.weight = weight;
+    if (typeof quantity !== 'undefined' && quantity !== null) _urlParams.quantity = quantity;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }

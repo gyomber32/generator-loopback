@@ -65,13 +65,15 @@ export class RightLowerLungApi extends BaseLoopBackApi {
    *
    * @param {string} rll The rll in the database. Values are given by using the value (types: Diminished, Clear, Coarse, etc).
    *
+   * @param {number} quantity Quantity the user wants to generate.
+   *
    * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
    * OK
    */
-  public getRll(rll: any = {}, customHeaders?: Function): Observable<any> {
+  public getRll(rll: any = {}, quantity: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/RightLowerLungs/RLL";
@@ -79,6 +81,7 @@ export class RightLowerLungApi extends BaseLoopBackApi {
     let _postBody: any = {};
     let _urlParams: any = {};
     if (typeof rll !== 'undefined' && rll !== null) _urlParams.rll = rll;
+    if (typeof quantity !== 'undefined' && quantity !== null) _urlParams.quantity = quantity;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }

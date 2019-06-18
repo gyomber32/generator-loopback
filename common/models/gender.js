@@ -26,17 +26,21 @@ module.exports = function (Gender) {
    * @param {Error|string} err Error object
    * @param {Gender} result Result object
    */
-  Gender.getGender = function (gender, callback) {
+  Gender.getGender = function (gender, quantity, callback) {
     var postgres = Gender.app.dataSources.postgres.connector;
+    //console.log("Gender: " + gender);
+    //console.log("Quantity: " + quantity)
     if (gender != undefined) {
-      var sql = 'SELECT gender FROM patients WHERE gender = ' + '$1' + ' LIMIT 1;';
-      var params = [gender];
+      // console.log(params);
+      var params = [gender, quantity];
+      var sql = 'SELECT gender FROM patients WHERE gender = ' + '$1' + ' LIMIT $2;';
       postgres.execute(sql, params, function (data, error) {
         callback(data, error);
       });
     } else {
-      var sql = 'SELECT gender FROM patients LIMIT 1;';
-      postgres.execute(sql, null, function (data, error) {
+      var params = [quantity];
+      var sql = 'SELECT gender FROM patients LIMIT $1;';
+      postgres.execute(sql, params, function (data, error) {
         callback(data, error);
       });
     }
@@ -71,6 +75,14 @@ module.exports = function (Gender) {
           description:
             'The gender of the database. Values are given by using the sex (e.g.: F - female or M - male).',
           required: false,
+          http: { source: 'query' }
+        },
+        {
+          arg: 'quantity',
+          type: 'number',
+          description:
+            'Quantity the user wants to generate.',
+          required: true,
           http: { source: 'query' }
         }],
       returns:
