@@ -19,7 +19,7 @@ describe("Server", () => {
     describe("GET /getBloodGlucose when all parameters are good", () => {
         var data = {};
         beforeAll((done) => {
-            Request.get("http://localhost:3100/api/BloodGlucoses/getBloodGlucose?bloodGlucose=7&quantity=10", (error, response, body) => {
+            Request.get("http://localhost:3100/api/BloodGlucoses/getBloodGlucose?bloodGlucose=7&quantity=20", (error, response, body) => {
                 data.error = error;
                 data.status = response.statusCode;
                 data.body = JSON.parse(body);
@@ -39,7 +39,7 @@ describe("Server", () => {
             expect(data.body).not.toContain({ "valuenum": 150 });
         });
         it("Body has to contain appropriate number of data", () => {
-            expect(data.body.length).toEqual(10);
+            expect(data.body.length).toEqual(20);
         });
     });
 
