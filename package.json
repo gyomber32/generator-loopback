@@ -6,11 +6,12 @@
     "node": ">=4"
   },
   "scripts": {
-    "lint": "eslint .",
     "start": "node .",
-    "posttest": "npm run lint"
+    "test-init": "./node_modules/jasmine/bin/jasmine.js init",
+    "test": "./node_modules/jasmine/bin/jasmine.js"
   },
   "dependencies": {
+    "@moebius/http-graceful-shutdown": "^1.1.0",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "helmet": "^3.10.0",
@@ -23,7 +24,8 @@
   },
   "devDependencies": {
     "eslint": "^3.17.1",
-    "eslint-config-loopback": "^8.0.0"
+    "eslint-config-loopback": "^8.0.0",
+    "jasmine": "^3.5.0"
   },
   "repository": {
     "type": "",

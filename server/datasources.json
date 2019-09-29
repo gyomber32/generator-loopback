@@ -4,11 +4,10 @@
         "connector": "memory"
     },
     "postgres": {
-        "host": "85.238.87.55",
+        "host": "127.0.0.1",
         "name": "postgres",
         "connector": "postgresql",
         "port": 5432,
-        "url": "postgres://ginger:source32@85.238.87.55:5432/mimic?ssl=false",
         "database": "mimic",
         "user": "ginger",
         "password": "source32",
