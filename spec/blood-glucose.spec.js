@@ -5,7 +5,7 @@ describe("Server", () => {
     var server;
     beforeAll(() => {
         server = require("../server/server");
-        jasmine.DEFAULT_TIMEOUT_INTERVAL= 200000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
     });
     afterAll(() => {
         const shutdownManager = new GracefulShutdownManager(server);
