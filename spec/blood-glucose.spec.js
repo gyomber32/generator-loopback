@@ -67,27 +67,6 @@ describe("Server", () => {
         });
     });
 
-    describe("GET /getBloodGlucose when bloodGlucose has a wrong value", () => {
-        var data = {};
-        beforeAll((done) => {
-            Request.get("http://localhost:3100/api/BloodGlucoses/getBloodGlucose?bloodGlucose=800&quantity=10", (error, response, body) => {
-                data.error = error;
-                data.status = response.statusCode;
-                data.body = JSON.parse(body);
-                done();
-            });
-        });
-        it("No error has to be occur", () => {
-            expect(data.error).toBeNull();
-        });
-        it("Status code has to be 200", () => {
-            expect(data.status).toBe(200);
-        });
-        it("Body has to be undefined", () => {
-            expect(data.body).toEqual([]);
-        });
-    });
-
     describe("GET /getBloodGlucose when quantity has a wrong value", () => {
         var data = {};
         beforeAll((done) => {

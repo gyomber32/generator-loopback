@@ -2,23 +2,6 @@
 module.exports = function (Weight) {
 
   /**
-   * addWeight
-   * @param {string} weight The weight measurement value of the database.
-   * @callback {Function} callback Callback function
-   * @param {Error|string} err Error object
-   * @param {any} result Result object
-   */
-  Weight.addWeight = function (weight, callback) {
-
-    // Replace the code below with your implementation.
-    // Please make sure the callback is invoked.
-    process.nextTick(function () {
-      var err = new Error('Not implemented');
-      callback(err);
-    });
-  }
-
-  /**
    * getWeight
    * @param {string} weight The weight in the database. Values are given by using the value (e.g.: 74 or 86).
    * @callback {Function} callback Callback function
@@ -43,24 +26,6 @@ module.exports = function (Weight) {
       });
     }
   }
-
-  Weight.remoteMethod('addWeight',
-    {
-      isStatic: true,
-      consumes: ['application/json'],
-      accepts:
-        [{
-          arg: 'weight',
-          type: 'number',
-          description: 'The weight measurement value of the database.',
-          required: false,
-          http: { source: 'query' }
-        }],
-      returns: [],
-      http: { verb: 'post', path: '' },
-      description: undefined
-    }
-  );
 
   Weight.remoteMethod('getWeight',
     {

@@ -2,24 +2,6 @@
 module.exports = function (Gender) {
 
   /**
-   * addGender
-   * @param {string} gender Add gender to the database.
-   * @callback {Function} callback Callback function
-   * @param {Error|string} err Error object
-   * @param {any} result Result object
-   */
-  Gender.addGender = function (gender, callback) {
-
-    // Replace the code below with your implementation.
-    // Please make sure the callback is invoked.
-    process.nextTick(function () {
-      var err = new Error('Not implemented');
-      callback(err);
-    });
-
-  }
-
-  /**
    * getGender
    * @param {string} gender The gender of the database. Values are given by using the sex (e.g.: F - female or M - male).
    * @callback {Function} callback Callback function
@@ -45,24 +27,6 @@ module.exports = function (Gender) {
       });
     }
   }
-
-  Gender.remoteMethod('addGender',
-    {
-      isStatic: true,
-      consumes: ['application/json'],
-      accepts:
-        [{
-          arg: 'gender',
-          type: 'string',
-          description: 'Add gender to the database.',
-          required: false,
-          http: { source: 'query' }
-        }],
-      returns: [],
-      http: { verb: 'post', path: '' },
-      description: undefined
-    }
-  );
 
   Gender.remoteMethod('getGender',
     {

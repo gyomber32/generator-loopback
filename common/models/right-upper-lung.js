@@ -2,24 +2,6 @@
 module.exports = function (RightUpperLung) {
 
   /**
-   * addRul
-   * @param {string} rul The rul measurement value of the database.
-   * @callback {Function} callback Callback function
-   * @param {Error|string} err Error object
-   * @param {any} result Result object
-   */
-  RightUpperLung.addRul = function (rul, callback) {
-
-    // Replace the code below with your implementation.
-    // Please make sure the callback is invoked.
-    process.nextTick(function () {
-      var err = new Error('Not implemented');
-      callback(err);
-    });
-
-  }
-
-  /**
    * getRul
    * @param {string} rul The rul in the database. Values are given by using the value (types: Diminished, Clear, Coarse, etc).
    * @callback {Function} callback Callback function
@@ -45,24 +27,6 @@ module.exports = function (RightUpperLung) {
     }
 
   }
-
-  RightUpperLung.remoteMethod('addRul',
-    {
-      isStatic: true,
-      consumes: ['application/json'],
-      accepts:
-        [{
-          arg: 'rul',
-          type: 'string',
-          description: 'The rul measurement value of the database.',
-          required: false,
-          http: { source: 'query' }
-        }],
-      returns: [],
-      http: { verb: 'post', path: '/RUL' },
-      description: undefined
-    }
-  );
 
   RightUpperLung.remoteMethod('getRul',
     {
